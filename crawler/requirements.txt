@@ -1,0 +1,4 @@
+asyncpg==0.26.0
+Scrapy~=2.6.3
+Twisted~=22.8.0
+setuptools~=65.4.0

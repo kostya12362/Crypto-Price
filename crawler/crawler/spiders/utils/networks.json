@@ -1,0 +1,218 @@
+[
+    {
+        "id": 1,
+        "name": "Callisto Network",
+        "symbol": "CLO",
+        "blockExplorerURL": "https://callistoexplorer.com/address/{contract_address}",
+        "chainId": 820,
+        "logoNetworkURL": "https://s2.coinmarketcap.com/static/img/coins/64x64/2757.png",
+        "isActive": true,
+        "contracts": true
+    },
+    {
+        "id": 2,
+        "name": "Ethereum Classic",
+        "symbol": "ETC",
+        "blockExplorerURL": "https://blockscout.com/etc/mainnet/token/{contract_address}/token-transfers",
+        "chainId": 61,
+        "logoNetworkURL": "https://s2.coinmarketcap.com/static/img/coins/64x64/1839.png",
+        "isActive": true,
+        "contracts": true
+    },
+    {
+        "id": 3,
+        "name": "BNB Smart Chain (BEP20)",
+        "symbol": "BSC",
+        "blockExplorerURL": "https://bscscan.com/token/{contract_address}/",
+        "chainId": 56,
+        "logoNetworkURL": "https://s2.coinmarketcap.com/static/img/coins/64x64/1839.png",
+        "isActive": true,
+        "contracts": true
+    },
+    {
+        "id": 4,
+        "name": "BNB Beacon Chain (BEP2)",
+        "symbol": "BEP2",
+        "blockExplorerURL": "https://explorer.binance.org/asset/{contract_address}",
+        "logoNetworkURL": "https://s2.coinmarketcap.com/static/img/coins/64x64/1839.png",
+        "isActive": true,
+        "contracts": true
+    },
+    {
+        "id": 5,
+        "name": "Ethereum",
+        "symbol": "ETH",
+        "blockExplorerURL": "https://etherscan.io/token/{contract_address}",
+        "chainId": 1,
+        "logoNetworkURL": "https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png",
+        "isActive": true,
+        "contracts": true
+    },
+    {
+        "id": 6,
+        "name": "Radix",
+        "symbol": "XRD",
+        "blockExplorerURL": "https://explorer.radixdlt.com/#/tokens/{contract_address}",
+        "logoNetworkURL": "https://s2.coinmarketcap.com/static/img/coins/64x64/11948.png",
+        "isActive": true,
+        "contracts": true
+    },
+    {
+        "id": 7,
+        "name": "Solana",
+        "symbol": "SOL",
+        "blockExplorerURL": "https://solscan.io/account/{contract_address}",
+        "logoNetworkURL": "https://s2.coinmarketcap.com/static/img/coins/64x64/5426.png",
+        "isActive": true,
+        "contracts": true
+    },
+    {
+        "id": 8,
+        "name": "Tron",
+        "symbol": "TRX",
+        "blockExplorerURL": "https://tronscan.org/#/token20/{contract_address}",
+        "logoNetworkURL": "https://s2.coinmarketcap.com/static/img/coins/64x64/1958.png",
+        "isActive": true,
+        "contracts": true
+    },
+    {
+        "id": 9,
+        "name": "Polygon",
+        "symbol": "MATIC",
+        "blockExplorerURL": "https://polygonscan.com/token/{contract_address}",
+        "chainId": 137,
+        "logoNetworkURL": "https://s2.coinmarketcap.com/static/img/coins/64x64/3890.png",
+        "isActive": true,
+        "contracts": true
+    },
+    {
+        "id": 10,
+        "name": "BitTorrent",
+        "symbol": "BTT",
+        "blockExplorerURL": "https://bttcscan.com/token/{contract_address}",
+        "chainId": 199,
+        "logoNetworkURL": "https://s2.coinmarketcap.com/static/img/coins/64x64/16086.png",
+        "isActive": true,
+        "contracts": true
+    },
+    {
+        "id": 11,
+        "name": "Avalanche",
+        "symbol": "AVAX",
+        "blockExplorerURL": "https://avascan.info/blockchain/c/address/{contract_address}/token",
+        "chainId": 43114,
+        "logoNetworkURL": "https://s2.coinmarketcap.com/static/img/coins/64x64/5805.png",
+        "isActive": true,
+        "contracts": true
+    },
+    {
+        "id": 12,
+        "name": "Fantom",
+        "symbol": "FTM",
+        "blockExplorerURL": "https://ftmscan.com/token/{contract_address}",
+        "chainId": 250,
+        "logoNetworkURL": "https://s2.coinmarketcap.com/static/img/coins/64x64/3513.png",
+        "isActive": true,
+        "contracts": true
+    },
+    {
+        "id": 13,
+        "name": "Harmony",
+        "symbol": "ONE",
+        "blockExplorerURL": "https://explorer.harmony.one/address/{contract_address}",
+        "chainId": 1666600000,
+        "logoNetworkURL": "https://s2.coinmarketcap.com/static/img/coins/64x64/3945.png",
+        "isActive": true,
+        "contracts": true
+    },
+    {
+        "id": 14,
+        "name": "Fuse",
+        "symbol": "FUSE",
+        "blockExplorerURL": "https://explorer.fuse.io/token/{contract_address}/token-transfers",
+        "chainId": 122,
+        "logoNetworkURL": "https://s2.coinmarketcap.com/static/img/coins/64x64/5634.png",
+        "isActive": true,
+        "contracts": true
+    },
+    {
+        "id": 15,
+        "name": "Terra",
+        "symbol": "LUNC",
+        "blockExplorerURL": "https://finder.terra.money/mainnet/address/{contract_address}",
+        "logoNetworkURL": "https://s2.coinmarketcap.com/static/img/coins/64x64/4172.png",
+        "isActive": true,
+        "contracts": true
+    },
+    {
+        "id": 16,
+        "name": "Terra 2.0",
+        "symbol": "LUNA",
+        "blockExplorerURL": "https://finder.terra.money/mainnet/address/{contract_address}",
+        "logoNetworkURL": "https://s2.coinmarketcap.com/static/img/coins/64x64/20314.png",
+        "isActive": true,
+        "contracts": true
+    },
+    {
+        "id": 17,
+        "name": "Moonriver",
+        "symbol": "MOVR",
+        "blockExplorerURL": "https://moonriver.moonscan.io/token/{contract_address}",
+        "chainId": 1285,
+        "logoNetworkURL": "https://s2.coinmarketcap.com/static/img/coins/64x64/9285.png",
+        "isActive": true,
+        "contracts": true
+    },
+    {
+        "id": 18,
+        "name": "KCC",
+        "symbol": "KCS",
+        "blockExplorerURL": "https://explorer.kcc.io/ru/token/{contract_address}",
+        "chainId": 321,
+        "logoNetworkURL": "https://s2.coinmarketcap.com/static/img/coins/64x64/2087.png",
+        "isActive": true,
+        "contracts": true
+    },
+    {
+        "id": 19,
+        "name": "xDai",
+        "symbol": "xDai",
+        "blockExplorerURL": "https://explorer.poa.network/xdai/mainnet/token/{contract_address}/token-transfers",
+        "chainId": 100,
+        "logoNetworkURL": "https://s2.coinmarketcap.com/static/img/coins/64x64/8635.png",
+        "isActive": true,
+        "contracts": true
+    },
+    {
+        "id": 20,
+        "name": "Bitcoin",
+        "symbol": "BTC",
+        "logoNetworkURL": "https://s2.coinmarketcap.com/static/img/coins/64x64/1.png",
+        "isActive": true
+    },
+    {
+        "id": 21,
+        "name": "Litecoin",
+        "symbol": "LTC",
+        "logoNetworkURL": "https://s2.coinmarketcap.com/static/img/coins/64x64/2.png",
+        "isActive": true
+    },
+    {
+        "id": 22,
+        "name": "Polkadot",
+        "symbol": "DOT",
+        "logoNetworkURL": "https://s2.coinmarketcap.com/static/img/coins/64x64/6636.png",
+        "isActive": true,
+        "contracts": true
+    },
+    {
+        "id": 23,
+        "name": "OKExChain",
+        "symbol": "OKC",
+        "blockExplorerURL": "https://www.oklink.com/ru/okc/token/{contract_address}",
+        "chainId": 66,
+        "logoNetworkURL": "https://s2.coinmarketcap.com/static/img/coins/64x64/8267.png",
+        "isActive": true,
+        "contracts": true
+    }
+]
