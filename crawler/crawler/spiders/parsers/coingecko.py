@@ -22,18 +22,23 @@ class CoinGeckoParser(BaseParser):
     # FIELDS
     @property
     def name(self) -> str:
-        return self.get_from_json['name']
+        xpath = '//div[contains(text(), "Rank #")]/following-sibling::div/div'
+        _v = re.findall(r'\((.*)\)', self.response.xpath(xpath).get())[0]
+        return re.sub(r'\((.*)\)', '', _v).strip()
 
     # FIELDS
     @property
     def symbol(self) -> str:
-        return self.get_from_json['currency']
+        xpath = '//div[contains(text(), "Rank #")]/following-sibling::div/div'
+        _v = re.findall(r'\((.*)\)', self.response.xpath(xpath).get())[0]
+        return _v
 
     # FIELDS
     @property
     def slug(self) -> str:
-        slug = re.findall(r'coins\/(.+)$', self.response.url)
-        return slug[0]
+        xpath = '//a/@data-source'
+        slug = self.response.xpath(xpath).get()
+        return slug
 
     # FIELDS
     @property

@@ -28,14 +28,17 @@ class SoyFinanceSpider(BaseSpider):
 
     def parse(self, response, **kwargs):
         contracts = self.extract_contracts(response)
+        print(contracts)
         yield scrapy.Request(url=self.url, method='POST', body=json.dumps(self.token_body(contracts=contracts)),
                              callback=self.get_detail)
 
-    def get_detail(self, response):
-        yield scrapy.Request(url=self.url_js, callback=self.get_detail_js, meta={'data': json.loads(response.text)},
-                             dont_filter=True)
+    # def get_detail(self, response):
+    #     yield scrapy.Request(url=self.url_js, callback=self.get_detail_js, meta={'data': json.loads(response.text)},
+    #                          dont_filter=True)
 
-    def get_detail_js(self, response):
+    def get_detail(self, response):
+        from scrapy.shell import inspect_response
+        inspect_response(response, self)
         data = self.get_data_from_js(response.text)
         for token in response.meta['data']['data']['tokens']:
             item = dict()
@@ -51,7 +54,6 @@ class SoyFinanceSpider(BaseSpider):
                 contract[fields[1]] = getattr(self.parser_contract(item=token), fields[0])
             contracts.append(contract)
             item['contracts'] = contracts
-            item['price'] = list()
             yield item
 
     @staticmethod
@@ -108,3 +110,7 @@ class SoyFinanceSpider(BaseSpider):
             _data = _data.replace('name:', '"name":')
             _data = _data.replace('symbol:', '"symbol":')
             return json.loads(_data)
+
+    @staticmethod
+    def hard_list():
+        return

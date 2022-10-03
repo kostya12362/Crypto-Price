@@ -1,7 +1,7 @@
 import json
 from typing import Union
 from .base import BaseParser
-from ..utils.network import detect_network
+from .detect_network import detect_network
 
 
 class CoinGeckoContractsParser(BaseParser):
@@ -34,9 +34,10 @@ class CoinGeckoContractsParser(BaseParser):
     def __clear_network_name(self):
         xpath_chain_id = 'following-sibling::img/@data-chain-id'
         xpath_network = 'parent::div/div[2]//span/text()'
+        chain_id = self._contract.xpath(xpath_chain_id).get()
         return detect_network(
             name_network=self._contract.xpath(xpath_network).get(),
-            chain_id=self._contract.xpath(xpath_chain_id).get(),
+            chain_id=int(chain_id) if chain_id else None,
             contract_address=self.contract_address
         )
 

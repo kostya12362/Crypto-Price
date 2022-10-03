@@ -30,8 +30,6 @@ class CoinMarketCapParser(BaseParser):
     @property
     def rank(self) -> Union[int, None]:
         _v = self.data['statistics'].get('rank')
-        if not _v:
-            print(self.data['id'])
         return _v if _v else None
 
     # FIELDS
@@ -74,7 +72,7 @@ class CoinMarketCapParser(BaseParser):
     def explorers(self) -> Union[list, None]:
         _v = self.data['urls']['explorer']
         if self.data.get('platforms'):
-            _v += [i.get('contractExplorerUrl') for i in self.data.get('platforms', [])]
+            _v += [i.get('contractExplorerUrl') for i in self.data.get('platforms', []) if i.get('contractExplorerUrl')]
         return _v if _v else None
 
     # FIELDS_META

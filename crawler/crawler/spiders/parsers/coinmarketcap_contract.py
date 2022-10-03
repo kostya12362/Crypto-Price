@@ -1,7 +1,7 @@
 import re
 from typing import Union
 from .base import BaseParser
-from ..utils.network import detect_network
+from .detect_network import detect_network
 
 
 class CoinMarketCapContractsParser(BaseParser):

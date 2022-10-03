@@ -1,7 +1,6 @@
 import re
 import json
 import scrapy
-from datetime import datetime
 
 from ..parsers import (
     CoinMarketCapParser,

@@ -1,6 +1,10 @@
+import json
+import logging
 import asyncio
 import asyncpg
-from typing import (Optional, List)
+import requests
+
+logger = logging.getLogger(__name__)
 
 
 class BasePipeline:
@@ -97,36 +101,41 @@ class BasePipeline:
                                           contract['logoURL'],
                                           contract['rpcNodeURL'],
                                           contract.get('bridge', False),
-                                          contract['cryptocurrencyId'],
+                                          contract.get('cryptocurrencyId'),
                                           contract.get('networkId', None),
-                                          market['marketId']
+                                          market['marketId'],
                                           )
 
-    async def insert_history_price(self, price: dict, market: dict):
-        async with self.conn.acquire() as connection:
-            async with connection.transaction():
-                await connection.fetchval('''
-                    INSERT INTO history_price(date_time, cryptocurrency_id, price, market_id)
-                    VALUES($1, $2, $3, $4)
-                    ON CONFLICT (date_time, cryptocurrency_id, price, market_id) DO NOTHING
-                    RETURNING "date_time", cryptocurrency_id, price;
-                ''', price['date_time'], price['cryptocurrencyId'], price['price'], market['marketId'])
-
-    async def insert_many_history_price(self, price: List[dict], market: dict, cryptocurrency_id: int):
-        async def record_gen():
-            for i in price:
-                yield (i['date_time'], cryptocurrency_id, i['price'], market['marketId'],)
-
+    async def insert_history_price(self, item):
         async with self.conn.acquire() as connection:
             async with connection.transaction():
                 try:
-                    await connection.copy_records_to_table(
-                        table_name='history_price',
-                        columns=['date_time', 'cryptocurrency_id', 'price', 'market_id'],
-                        records=record_gen()
-                    )
-                except asyncpg.exceptions.UniqueViolationError:
-                    pass
+                    await connection.fetchval('''
+                        INSERT INTO history_price(date_time, cryptocurrency_id, price, market_id)
+                        VALUES($1, $2, $3, $4)
+                        ON CONFLICT (cryptocurrency_id, price, market_id, date_time) DO NOTHING
+                        RETURNING "date_time", cryptocurrency_id, price;
+                    ''', item['date_time'], item['cryptocurrencyId'], item['price'], item['marketId'], )
+                except KeyError:
+                    logging.error(json.dumps(item))
+
+    async def get_last_price(self, market_id: int):
+        """
+        :param market_id:
+        :return: {'1': {'id': 14106, 'price': 4.0}.....}
+        """
+        async with self.conn.acquire() as connection:
+            async with connection.transaction():
+                val = await connection.fetch('''
+                    SELECT  DISTINCT ON (hp.cryptocurrency_id) cr.slug as "slug", cr.id as "id", hp.price as "price"
+                        FROM cryptocurrency AS cr
+                    LEFT JOIN history_price hp ON cr.id = hp.cryptocurrency_id
+                    WHERE cr.market_id = $1
+                    ORDER BY hp.cryptocurrency_id, hp.date_time DESC;
+                ''', market_id)
+                return {
+                    i['slug']: {'id': i['id'], 'price': i['price']} for i in list(val)
+                }
 
 
 class FiatBasePipeline(BasePipeline):
@@ -136,7 +145,7 @@ class FiatBasePipeline(BasePipeline):
             async with connection.transaction():
                 await connection.fetchval(
                     '''
-                        INSERT INTO fiat_currency(symbol, name, symbol_native, decimal_digits,
+                        INSERT INTO fiat(symbol, name, symbol_native, decimal_digits,
                          code, name_plural, value, market_id)
                         VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
                         ON CONFLICT (code)

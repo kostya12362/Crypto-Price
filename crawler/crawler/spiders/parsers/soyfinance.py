@@ -93,5 +93,3 @@ class SoyFinanceParser(BaseParser):
     @property
     def audit_infos(self) -> None:
         return
-
-

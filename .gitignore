@@ -127,3 +127,12 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+volumes
+api/_migrations
+logs
+eggs
+build
+crawler.egg-info
+project.egg-info
+dbs
+twistd.pid

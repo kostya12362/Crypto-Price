@@ -1,7 +1,6 @@
 import asyncio
 import json
 import logging
-import scrapy
 from .base import FiatBasePipeline
 
 logger = logging.getLogger(__name__)

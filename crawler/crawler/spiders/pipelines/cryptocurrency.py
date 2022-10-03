@@ -29,7 +29,8 @@ class CryptocurrencySavePipeline(BasePipeline):
         logger.info('======================== CLOSE SPIDER ========================')
 
     async def process_item(self, item, spider):
-        val = await self.insert_new_item(item=item, market=self.market)
+        if len(item.keys()) > 2:
+            val = await self.insert_new_item(item=item, market=self.market)
         # save contract
         if item.get('contracts'):
             async def create_contract(contract: dict):

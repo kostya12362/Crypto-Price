@@ -6,7 +6,7 @@ class BaseSpider(scrapy.Spider):
         'DOWNLOAD_DELAY': 0.5,
         'AUTOTHROTTLE_START_DELAY': 0,
         'ITEM_PIPELINES': {
-            'cryptocurrency.pipelines.test.CryptocurrencySavePipeline': 300
+            'crawler.spiders.pipelines.cryptocurrency.CryptocurrencySavePipeline': 300
         },
     }
     handle_httpstatus_list = [403, 422, 500]

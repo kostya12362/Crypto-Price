@@ -15,7 +15,7 @@ class Exchangeratesapi(scrapy.Spider):
     handle_httpstatus_list = [422]
     custom_settings = {
         'ITEM_PIPELINES': {
-            'cryptocurrency.pipelines.fiat.ExchangeRateSavePipeline': 300
+            'crawler.spiders.pipelines.fiat.ExchangeRateSavePipeline': 300
         }
     }
     parser = ExchangeRatesAPIParser

@@ -2,6 +2,7 @@ from typing import (
     Union,
 )
 from .base import BaseParser
+from .detect_network import detect_network
 
 
 class SoyFinanceContractsParser(BaseParser):
@@ -19,7 +20,12 @@ class SoyFinanceContractsParser(BaseParser):
 
     @property
     def name_network(self):
-        return 'Callisto Mainnet'
+        name_network, _ = detect_network(
+            name_network='Callisto Mainnet',
+            chain_id=self.chain_id,
+            contract_address=self.contract_address
+        )
+        return name_network
 
     @property
     def decimals(self) -> int:
