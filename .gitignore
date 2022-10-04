@@ -136,3 +136,4 @@ crawler.egg-info
 project.egg-info
 dbs
 twistd.pid
+celerybeat-schedule.db
