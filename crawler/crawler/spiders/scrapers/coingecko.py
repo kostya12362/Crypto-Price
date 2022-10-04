@@ -22,11 +22,10 @@ class CoingeckoSpider(BaseSpider):
 
     def parse(self, response, **kwargs):
         hrefs = list(set([re.sub(r'(\/usd)$', '', i) for i in response.xpath('//a/@href').getall()]))
-        hrefs = ['/en/coins/defi-yield-protocol']
         for href in hrefs:
             yield scrapy.Request(url=response.urljoin(href), callback=self.get_item)
-        # if len(hrefs) == 300:
-        #     yield scrapy.Request(url=self.url.format(page=int(re.findall(r'page=(\d+)', response.url)[0]) + 1))
+        if len(hrefs) == 300:
+            yield scrapy.Request(url=self.url.format(page=int(re.findall(r'page=(\d+)', response.url)[0]) + 1))
 
     def get_item(self, response):
         item = dict()

@@ -92,7 +92,10 @@ class BasePipeline:
                         network_id = EXCLUDED.network_id
                         RETURNING  id, name, symbol, contract_address, decimals, block_explorer_url, network_name,
                         network_logo_url, chain_id, logo_url, rpc_node_url, is_bridge, cryptocurrency_id,
-                        network_id, market_id ;''', contract['name'], contract['symbol'], contract['contractAddress'],
+                        network_id, market_id ;''',
+                                          contract['name'],
+                                          contract['symbol'],
+                                          contract['contractAddress'],
                                           contract['decimals'],
                                           contract['blockExplorerURL'],
                                           contract['networkName'],
@@ -127,11 +130,11 @@ class BasePipeline:
         async with self.conn.acquire() as connection:
             async with connection.transaction():
                 val = await connection.fetch('''
-                    SELECT  DISTINCT ON (hp.cryptocurrency_id) cr.slug as "slug", cr.id as "id", hp.price as "price"
+                    SELECT  DISTINCT ON (cr.id) cr.slug as "slug", cr.id as "id", hp.price as "price"
                         FROM cryptocurrency AS cr
                     LEFT JOIN history_price hp ON cr.id = hp.cryptocurrency_id
                     WHERE cr.market_id = $1
-                    ORDER BY hp.cryptocurrency_id, hp.date_time DESC;
+                    ORDER BY cr.id, hp.date_time DESC;
                 ''', market_id)
                 return {
                     i['slug']: {'id': i['id'], 'price': i['price']} for i in list(val)

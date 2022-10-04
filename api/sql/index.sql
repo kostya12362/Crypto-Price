@@ -10,6 +10,8 @@ CREATE UNIQUE INDEX IF NOT EXISTS idx_marge_id ON merge_cryptocurrency (from_cry
 -- GOOD INDEX
 CREATE UNIQUE INDEX IF NOT EXISTS idx_merge_cryptocurrency_sort_unique ON merge_cryptocurrency (sort(array[from_cryptocurrency_id, to_cryptocurrency_id]));
 -- GOOD INDEX
-CREATE UNIQUE INDEX IF NOT EXISTS idx_price_unique ON history_price(date_time, cryptocurrency_id, price, market_id);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_price_unique ON history_price (cryptocurrency_id, price, market_id, date_time DESC);
 -- GOOD INDEX
 CREATE INDEX IF NOT EXISTS idx_price_order ON history_price(cryptocurrency_id, date_time DESC);
+
+CREATE INDEX IF NOT EXISTS idx_market ON market(id);

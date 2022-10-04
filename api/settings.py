@@ -7,7 +7,9 @@ load_dotenv()
 
 
 class Settings(BaseSettings):
-    DEBUG: str = False
+    DEBUG: bool = False
+    APP_NAME: str = "AbsoluteWallet"
+    VERSION: str = "1.0.0"
     BASE_DIR: str = str(Path.cwd())  # base dir detected for render templates
 
     POSTGRES_PORT: str  # DB port
@@ -32,12 +34,17 @@ class Settings(BaseSettings):
 
     @property
     def unicorn_config(self):
-        return {
-            'app': "main:create_app",
+        server = {
+            'app': "main:app",
             'host': "0.0.0.0",
-            'port': 8000,
+            'port': 5007,
             'debug': self.DEBUG,
         }
+        if self.DEBUG:
+            server['reload'] = True
+        else:
+            server['root_path'] = self.base_path
+        return server
 
 
 config = Settings()

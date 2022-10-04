@@ -1,0 +1,14 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+celery = "~=5.2.7"
+redis = "~=4.3.4"
+python-scrapyd-api = "~=2.1.2"
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"

@@ -4,7 +4,7 @@ import scrapy.signals as sgn
 
 
 class BaseNonStopSpider(scrapy.Spider):
-    TIME_SLEEP = 60
+    TIME_SLEEP = 70
     custom_settings = {
         'LOG_LEVEL': 'INFO',
         'ITEM_PIPELINES': {

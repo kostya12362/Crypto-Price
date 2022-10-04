@@ -14,12 +14,23 @@ from utils.middlewares import setup_middlewares
 from utils.db_init import setup_database
 from settings import config
 
-app = FastAPI()
-
+app = FastAPI(
+    title=config.APP_NAME,
+    docs_url='/docs',
+    redoc_url='/redoc',
+    version=config.VERSION
+)
 
 if not config.DEBUG:
+    print("++++++++++")
     app.servers = [{"url": config.base_path}]
     app.root_path = config.base_path
+
+
+@app.get('/favicon.ico', include_in_schema=False)
+async def favicon():
+    return FileResponse('./favicon.ico')
+
 
 app.include_router(price, prefix='/price', tags=['Price'])
 app.include_router(cryptocurrency, prefix='/cryptocurrency', tags=['Cryptocurrency'])
@@ -41,14 +52,6 @@ async def shutdown_event():
     await asyncio.wait((app.state.client_session.close()), timeout=5.0)
 
 
-@app.get('/favicon.ico', include_in_schema=False)
-async def favicon():
-    return FileResponse('./favicon.ico')
-
-
 if __name__ == "__main__":
-    uvicorn.run(
-        app="main:app",
-        host="0.0.0.0",
-        port=5007,
-    )
+    print(config.unicorn_config)
+    uvicorn.run(**config.unicorn_config)

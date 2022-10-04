@@ -15,6 +15,18 @@ services:
     ports:
       - "5432:5432"
 
+  redis:
+    image: 'redis:alpine'
+    command: redis-server --requirepass jjsja7123jdasdkk21238882jjejq
+    restart: always
+    expose:
+      - 6379
+    ports:
+      - "6377:6379"
+    hostname: redis
+    volumes:
+      - ./${VOLUMES}/redis/redis_data:/var/lib/redis/data
+
   backend:
     container_name: "api-cr"
     restart: "always"
@@ -29,6 +41,7 @@ services:
       - .env
     depends_on:
       - db
+      - redis
 
   crawler:
     container_name: "crawler-cr"
@@ -48,4 +61,28 @@ services:
       - .env
     depends_on:
       - db
+      - redis
+
+  nginx:
+    restart: "always"
+    build:
+      context: .
+      dockerfile: nginx/nginx.Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/dev:/etc/nginx/conf.d
+    depends_on:
       - backend
+
+  tasks:
+    container_name: "tasks-cr"
+    restart: "always"
+    command: bash -c "celery -A tasks beat --detach && celery -A tasks worker"
+    build:
+      context: ./
+      dockerfile: tasks/tasks.Dockerfile
+    volumes:
+      - ./${VOLUMES}/tasks/data:/var/tasks
+    env_file:
+      - .env

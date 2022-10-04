@@ -22,7 +22,7 @@ class SoyFinanceParser(BaseParser):
     # FIELDS
     @property
     def slug(self) -> Union[str, None]:
-        return unicodedata.normalize('NFKD', f"{self.item['name']} {self.item['symbol']}").lower().replace(' ', '-')
+        return self.item['id']
 
     # FIELDS
     @property

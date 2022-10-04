@@ -25,7 +25,7 @@ class NetworkAPIView:
         networks = await Network.get_networks()
         return [NetworkSchemas(**network) for network in networks]
 
-    @router.get('/trigger')
+    @router.get('/trigger', include_in_schema=False)
     async def detect_networks(self):
         await Network.detect_network()
         return {"detail": "is processing"}

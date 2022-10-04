@@ -1,4 +1,3 @@
-import re
 import json
 import scrapy
 
@@ -26,7 +25,6 @@ class CoinMarketCapSpider(BaseSpider):
         'aux=ath,atl,high24h,low24h,num_market_pairs,cmc_rank,date_added,max_supply,circulating_supply,'
         'total_supply,volume_7d,volume_30d,volume_60d,tags'
     ]
-    # Price extract
     #url_price = 'https://api.coinmarketcap.com/data-api/v3/cryptocurrency/detail/chart?id={cm_id}&range={range}'
     #MAP_RANGE_DATE = ('1D', '7D', '1M', '3M', 'YTD', 'ALL',)
 

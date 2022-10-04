@@ -28,5 +28,4 @@ class CoinmarketcapSpider(scrapy.Spider):
                 _p = self.parser_contract(item=i)
                 contract[fields[1]] = getattr(_p, fields[0])
             contract['marketId'] = response.meta['market']['marketId']
-            print(contract)
             yield contract
